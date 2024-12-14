@@ -34,7 +34,11 @@ RUN apt-get update -y \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    # Create nonroot user and group
+    && groupadd -r nonroot \
+    && useradd -r -g nonroot nonroot \
+    && chown -R nonroot:nonroot /app
 
 # Copy the binary from the builder stage
 COPY --from=builder /app/target/release/zero2prod zero2prod
