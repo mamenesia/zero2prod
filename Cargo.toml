@@ -14,24 +14,34 @@ name = "zero2prod"
 actix-web = "4.9.0"
 config = "0.14.1"
 serde = { version = "1.0.215", features = ["derive"] }
-tokio = {version="1.42.0", features=["macros", "rt-multi-thread"]}
+tokio = { version = "1.42.0", features = ["macros", "rt-multi-thread"] }
 uuid = { version = "1.11.0", features = ["v4"] }
 chrono = { version = "0.4.38", default-features = false, features = ["clock"] }
 env_logger = "0.11.5"
+log = "0.4.22"
+tracing = { version = "0.1.41", features = ["log"] }
+tracing-subscriber = { version = "0.3.19", features = [
+  "registry",
+  "env-filter",
+] }
+tracing-bunyan-formatter = "0.3.10"
+tracing-log = "0.2.0"
+secrecy = { version = "0.10.3", features = ["serde"] }
+tracing-actix-web = "0.7.15"
+serde-aux = "4.5.0"
 
 # Using table-like toml syntax to avoid a super-long line!
 [dependencies.sqlx]
 version = "0.8"
 default-features = false
 features = [
-"runtime-tokio-rustls",
-"macros",
-"postgres",
-"uuid",
-"chrono",
-"migrate"
+  "runtime-tokio-rustls",
+  "macros",
+  "postgres",
+  "uuid",
+  "chrono",
+  "migrate",
 ]
 
 [dev-dependencies]
 reqwest = "0.12.9"
-
